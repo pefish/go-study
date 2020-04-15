@@ -6,7 +6,8 @@ import "C"
 
 import "fmt"
 
-//export GoSayHello  // export前面不能有空格
+// export前面不能有空格
+//export GoSayHello
 func GoSayHello(s *C.char) {
 	fmt.Print(C.GoString(s))
 }

@@ -22,7 +22,9 @@ var go_qsort_compare_info struct {
 	sync.Mutex
 }
 
-//export _cgo_qsort_compare  // 使用Go语言实现一个_cgo_qsort_compare函数，并且翻译成C语言
+// 使用Go语言实现一个_cgo_qsort_compare函数，并且翻译成C语言
+
+//export _cgo_qsort_compare
 func _cgo_qsort_compare(a, b unsafe.Pointer) C.int {
 	var (
 		// array memory is locked

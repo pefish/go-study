@@ -4,9 +4,9 @@
 package main
 
 /*
-// #cgo windows CFLAGS: -DCGO_OS_WINDOWS=1  // windows系统下设置CGO_OS_WINDOWS标志
-// #cgo darwin CFLAGS: -DCGO_OS_DARWIN=1
-// #cgo linux CFLAGS: -DCGO_OS_LINUX=1
+//#cgo windows CFLAGS: -DCGO_OS_WINDOWS=1  // windows系统下设置CGO_OS_WINDOWS标志
+//#cgo darwin CFLAGS: -DCGO_OS_DARWIN=1
+//#cgo linux CFLAGS: -DCGO_OS_LINUX=1
 //#if defined(CGO_OS_WINDOWS)
 //    const char* os = "windows";
 //#elif defined(CGO_OS_DARWIN)
@@ -17,8 +17,13 @@ package main
 //#error(unknown os)
 //#endif
 
-// #cgo CFLAGS: -DPNG_DEBUG=1 -I./include  // #cgo可以指定编译选项
-// #cgo LDFLAGS: -L/usr/local/lib -lpng
+//#cgo CFLAGS: -DPNG_DEBUG=1 -I./include  // #cgo可以指定编译选项
+//#cgo LDFLAGS: -L/usr/local/lib -lpng
+// 通过-I./number将number库对应头文件所在的目录加入头文件检索路径
+#cgo CFLAGS: -I./number
+// SRCDIR表示当前目录的绝对路径. 通过-L${SRCDIR}/number将编译后number静态库所在目录加为链接库检索路径，-lnumber表示链接libnumber.a静态库, -lnumber1表示链接number1.so动态库(-l可以链接静态也可以动态，自动找a、so后缀)
+#cgo LDFLAGS: -L${SRCDIR}/number -lnumber -lnumber1
+#include "number.h"
 #include "hello.h"
  */
 import "C"  // 表示将调用cgo命令生成对应的中间文件
@@ -61,6 +66,9 @@ func main() {
 		return values[i] < values[j]
 	})
 	fmt.Println(values)
+
+	// 调用静态链接库
+	fmt.Println(C.number_add_mod(10, 5, 12))
 }
 
 
