@@ -4,18 +4,18 @@
 package main
 
 /*
-//#cgo windows CFLAGS: -DCGO_OS_WINDOWS=1  // windows系统下设置CGO_OS_WINDOWS标志
-//#cgo darwin CFLAGS: -DCGO_OS_DARWIN=1
-//#cgo linux CFLAGS: -DCGO_OS_LINUX=1
-//#if defined(CGO_OS_WINDOWS)
-//    const char* os = "windows";
-//#elif defined(CGO_OS_DARWIN)
-//    const char* os = "darwin";
-//#elif defined(CGO_OS_LINUX)
-//    const char* os = "linux";
-//#else
-//#error(unknown os)
-//#endif
+#cgo windows CFLAGS: -DCGO_OS_WINDOWS=1  // windows系统下设置CGO_OS_WINDOWS标志
+#cgo darwin CFLAGS: -DCGO_OS_DARWIN=1
+#cgo linux CFLAGS: -DCGO_OS_LINUX=1
+#if defined(CGO_OS_WINDOWS)
+   const char* os = "windows";
+#elif defined(CGO_OS_DARWIN)
+   const char* os = "darwin";
+#elif defined(CGO_OS_LINUX)
+   const char* os = "linux";
+#else
+#error(unknown os)
+#endif
 
 //#cgo CFLAGS: -DPNG_DEBUG=1 -I./include  // #cgo可以指定编译选项
 //#cgo LDFLAGS: -L/usr/local/lib -lpng

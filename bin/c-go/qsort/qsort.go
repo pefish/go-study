@@ -3,7 +3,7 @@ package qsort
 /*
 #include <stdlib.h>
 
-typedef int (*qsort_cmp_func_t)(const void* a, const void* b);
+typedef int (*qsort_cmp_func_t)(const void* a, const void* b);  // 将比较函数类型（qsort最后一个参数）重新定义为一个qsort_cmp_func_t类型
 extern int _cgo_qsort_compare(void* a, void* b); // _cgo_qsort_compare是Go语言实现的，Go语言会编译成C语言，此文件要用_cgo_qsort_compare，所以声明extern
  */
 import "C"
@@ -71,6 +71,13 @@ func Slice(slice interface{}, less func(a, b int) bool) {
 	go_qsort_compare_info.elemsize = int(sv.Type().Elem().Size())
 	go_qsort_compare_info.less = less
 
+	// qsort是<stdlib.h>标准库提供的快速排序函数，定义如下
+	// void qsort(
+	//	void* base,
+	//	size_t num,
+	//	size_t size,
+	//	int (*cmp)(const void*, const void*)
+	// );
 	C.qsort(
 		go_qsort_compare_info.base,
 		C.size_t(go_qsort_compare_info.elemnum),

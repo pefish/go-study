@@ -2,7 +2,18 @@
 ## Start
 
 ```shell script
-go run ./bin/c-go/
+DYLD_LIBRARY_PATH=$DYLD_LIBRARY_PATH:`pwd`/bin/c-go/number go run ./bin/c-go/  // 添加一个库查找路径
+```
+
+或者
+
+```shell script
+go build ./bin/c-go/
+
+install_name_tool -change libnumber1.so `pwd`/bin/c-go/number/libnumber1.so ./c-go  // 修改库的查找路径  otool -L ./c-go 可以查看依赖库的查找路径
+
+./c-go
+
 ```
 
 ## Go语言和C语言类型对比
