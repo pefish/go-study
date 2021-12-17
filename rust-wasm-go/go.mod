@@ -1,4 +1,4 @@
-module add
+module rust-wasm-go
 
 go 1.17
 
